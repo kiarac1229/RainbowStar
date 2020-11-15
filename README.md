@@ -4,3 +4,5 @@ This was my very first project using canvas to make a rainbow star using various
 
 The lines are colored by each pixel
 
+
+Published at https://kiarac1229.github.io/RainbowStar/
