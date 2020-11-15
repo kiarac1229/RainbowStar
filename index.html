@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rainbow Star</title>
+<script>
+  /*
+     * Name:  Kiara Correa Acosta
+     * TA Hours: Sunday with Sivan Nachum
+     * Date: September 14, 2020
+     * Reflections on this assignment:
+     * I enjoyed figuring out the points that I needed in order to make the star. I did have to go to TA hours on how to work through making the loops but going to talk it through helped me understand what I needed.
+     * 
+     */
+    var canvas;    // DOM object corresponding to the canvas
+    var graphics;  // 2D graphics context for drawing on the canvas
+
+  function colorPixel(x,y, colorIt) {
+        graphics.fillRect(x,y,1,1);
+        graphics.fillStyle = colorIt ;
+
+    }
+    // think about what arguments this function will need?
+  function drawLine(x0, y0,  x1,  y1, colorIt) {
+        // TODO your code here -- this function implements the line drawing algorithm
+    var slope = (y1 - y0) / (x1 - x0);
+    var yIntercept = y0 - (slope * x0);
+
+    if (slope > 1 || slope < -1){
+      // green and purple square
+      if (y0 < y1){
+        for (y = y0; y < y1; y += 1){
+          x = (-(x1-x0)*y - x0*y1 + x1*y0) / (y0-y1);
+          colorPixel(Math.floor(x), Math.floor(y),colorIt);
+        }
+      }
+      else {
+        for (y = y0; y > y1; y -= 1){
+          x = (-(x1-x0)*y - x0*y1 + x1*y0) / (y0-y1);
+          colorPixel(Math.floor(x), Math.floor(y),colorIt);
+        }
+      }
+    }
+    // blue and red square
+    else{
+      if (x0 < x1){
+        for (x = x0; x < x1; x += 1){
+          y = (slope * x)+ yIntercept;
+          colorPixel(Math.floor(x), Math.floor(y),colorIt);
+        }
+      }
+      else{
+        for (x = x0; x > x1; x -= 1){
+          y = (slope * x)+ yIntercept;
+          colorPixel(Math.floor(x), Math.floor(y),colorIt);
+        }
+      }
+    }
+  }
+function draw() {
+  // TODO your code here -- several calls to your drawLine function
+  drawLine(150, 0, 150, 300, "MediumBlue");
+  drawLine(0, 0, 300, 300,"Fuchsia");
+  drawLine(300,100,0, 200,"Olive");
+  drawLine(0, 80, 300, 217,"OrangeRed");
+  drawLine(300, 0, 0, 300,"DarkViolet");
+  drawLine(0,150, 300, 150, "Crimson");
+  drawLine(230, 20, 85, 255,"Lime");
+  drawLine(85, 20, 200, 255,"Cyan");
+}
+    function init() {
+        canvas = document.getElementById("theCanvas");
+        graphics = canvas.getContext("2d");
+        draw();  // draw something on the canvas
+    }
+</script>
+
+</head>
+<body onload="init()">
+    <canvas id="theCanvas" width="640" height="480"></canvas>
+</body>
+</html>
